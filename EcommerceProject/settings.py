@@ -31,10 +31,10 @@ env = environ.Env(
     DEBUG=(bool, False)
 )
 
-env_file = os.path.join(BASE_DIR, ".env")
+'''env_file = os.path.join(BASE_DIR, ".env")
 
 # reading .env file
-environ.Env.read_env(env_file)
+environ.Env.read_env(env_file)'''
 
 
 
@@ -154,6 +154,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# defines the location of static files in local development
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),] 
+
 # location of static files for production 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -166,6 +169,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/' # new
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # new
 
+
+# It is implicitly set for us and although this is an optional step, I prefer to make it explicit in all projects.
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
