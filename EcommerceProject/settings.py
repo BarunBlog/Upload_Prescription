@@ -31,10 +31,10 @@ env = environ.Env(
     DEBUG=(bool, False)
 )
 
-'''env_file = os.path.join(BASE_DIR, ".env")
+env_file = os.path.join(BASE_DIR, ".env")
 
 # reading .env file
-environ.Env.read_env(env_file)'''
+environ.Env.read_env(env_file)
 
 
 

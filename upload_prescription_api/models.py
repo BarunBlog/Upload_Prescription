@@ -13,7 +13,7 @@ class Upload_Prescription(models.Model):
     name = models.CharField(max_length=200)
     delivary = models.CharField(max_length=10, choices=Delivary_Choices)
     store = models.CharField(max_length=200)
-    prescription_file = models.FileField(upload_to='prescription/', validators=[validate_file_extension])
+    prescription_file = models.FileField(upload_to='prescription/', validators=[validate_file_extension], null=True, blank=True)
     apartment = models.CharField(max_length=250)
     House = models.CharField(max_length=250)
     Road = models.CharField(max_length=250)
