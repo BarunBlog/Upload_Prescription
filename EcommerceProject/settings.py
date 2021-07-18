@@ -66,7 +66,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'django.contrib.sites', # adding sites framework for controling multiple sites.
 
     # Local Apps
     'upload_prescription_api.apps.UploadPrescriptionApiConfig',
@@ -78,6 +80,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -167,7 +170,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Media file handilng
 MEDIA_URL = '/media/' # new
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # new
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # It is implicitly set for us and although this is an optional step, I prefer to make it explicit in all projects.
@@ -181,3 +186,14 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ]
 }
+
+if ENVIRONMENT == 'production':
+
+
+    # Database url
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES['default'].update(db_from_env)
+
+    # https://devcenter.heroku.com/articles/django-app-configuration
+    # Activate Django-Heroku.
+    django_heroku.settings(locals())
