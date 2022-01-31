@@ -75,6 +75,8 @@ INSTALLED_APPS = [
 
     # Third Party Apps
     'rest_framework',
+    'simple_chatbot',
+    'channels',
     
 ]
 
@@ -107,7 +109,16 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'EcommerceProject.wsgi.application'
+#WSGI_APPLICATION = 'EcommerceProject.wsgi.application'
+
+ASGI_APPLICATION = 'EcommerceProject.asgi.application'
+
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 
 # Database

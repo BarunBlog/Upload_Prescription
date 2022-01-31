@@ -1,0 +1,1 @@
+default_app_config = 'upload_prescription_api.apps.UploadPrescriptionApiConfig'
