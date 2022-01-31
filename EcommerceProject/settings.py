@@ -202,6 +202,11 @@ REST_FRAMEWORK = {
 
 if ENVIRONMENT == 'production':
 
+    SECURE_SSL_REDIRECT = True # force all non-HTTPS traffic to be redirected to HTTPS
+    SECURE_HSTS_SECONDS = 3600
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True # otherwise your site may still be vulnerable via an insecure connection to a subdomain.
+    SECURE_HSTS_PRELOAD = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
 
     # Database url
     db_from_env = dj_database_url.config(conn_max_age=500)
